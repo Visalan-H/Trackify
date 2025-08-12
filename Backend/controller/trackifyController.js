@@ -34,7 +34,7 @@ export async function register(req, res) {
         // create cookie
         res.cookie("jwt", token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000,
         });
@@ -85,7 +85,7 @@ export async function login(req, res) {
 
         res.cookie("jwt", token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000,
         });
