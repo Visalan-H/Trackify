@@ -55,7 +55,7 @@ const SignUpRight = () => {
             return;
         }
 
-        const url = "http://localhost:5001/api/register";
+        const url = `${import.meta.env.VITE_BACKEND_API}/api/register`;
         const toastId = toast.loading("Creating your account...");
 
         axios.post(url, { name, reg_no, grad_year, dept, password }, { withCredentials: true })
@@ -162,7 +162,7 @@ const SignUpRight = () => {
                     <div className="signup-button">
                         <button type="submit">Sign Up</button>
                     </div>
-                    <div style={{display:'flex',justifyContent:'space-between',alignItems:"center",width:"100%"}}  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: "center", width: "100%" }}  >
                         <Link to="/login" className='link'>Sign In</Link>
                         <Link className='link' to="/feedback">Need help?</Link>
                     </div>

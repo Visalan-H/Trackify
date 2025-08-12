@@ -74,7 +74,7 @@ function SingleCategory({ isDark, setIsDark }) {
         const fetchCategoryData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5001/api/courseByUser`, { withCredentials: true });
+                const response = await axios.get(`import.meta.env.VITE_BACKEND_API/api/courseByUser`, { withCredentials: true });
                 console.log(response.data);
                 setUser(response.data.user);
                 const oldCode = response.data.user.reg_no.slice(4, 6);
@@ -91,8 +91,8 @@ function SingleCategory({ isDark, setIsDark }) {
                 // calculate required credits based on user department and graduation year;
                 const dept = response.data.user.dept;
                 const grad_year = response.data.user.grad_year;
-                fetchRequirdCredits(category,dept,grad_year);
-          
+                fetchRequirdCredits(category, dept, grad_year);
+
 
             } catch (error) {
                 console.error('Error fetching category data:', error);

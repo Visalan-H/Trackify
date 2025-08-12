@@ -18,11 +18,11 @@ const Dashboard = ({ isDark, setIsDark, onDataRefresh }) => {
   const [runningTotal, setRunningTotal] = useState({});
   const [cgpa, setCgpa] = useState("");
 
-  
-  const [Loading,setLoading] = useState(true);
+
+  const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5001/api/userDetails", { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_BACKEND_API}/api/userDetails`, { withCredentials: true })
       .then(() => setAuthChecked(true))
       .catch(() => {
         toast.error("Please login or signup to continue");
@@ -33,9 +33,9 @@ const Dashboard = ({ isDark, setIsDark, onDataRefresh }) => {
   useEffect(() => {
     if (authChecked) {
       setLoading(true);
-      axios.get("http://localhost:5001/api/courseByUser", { withCredentials: true })
+      axios.get(`${import.meta.env.VITE_BACKEND_API}/api/courseByUser`, { withCredentials: true })
         .then((res) => {
-          const { user, user_sem_credits, totalCredits, runningTotal,CGPA } = res.data;
+          const { user, user_sem_credits, totalCredits, runningTotal, CGPA } = res.data;
           setUserDetails(user);
           setUserSemCredits(user_sem_credits);
           setTotalCredits(Number(totalCredits));
@@ -43,11 +43,11 @@ const Dashboard = ({ isDark, setIsDark, onDataRefresh }) => {
           setCgpa(CGPA);
         })
         .catch((err) => console.log(err))
-        .finally(()=>{
+        .finally(() => {
           setLoading(false)
         });
 
-      axios.get("http://localhost:5001/api/userDetails", { withCredentials: true })
+      axios.get(`${import.meta.env.VITE_BACKEND_API}/api/userDetails`, { withCredentials: true })
         .then((res) => setUserDetails(prev => ({ ...prev, name: res.data.user.name })))
         .catch((err) => console.log(err));
     }
@@ -59,7 +59,7 @@ const Dashboard = ({ isDark, setIsDark, onDataRefresh }) => {
     <div>
       <Sidebar dark={isDark} />
       <Navbar onDataRefresh={onDataRefresh} dark={isDark} setIsDark={setIsDark} name={userDetails.name || ''} />
-      <Information dark={isDark} user={userDetails} cgpa={cgpa}  totalCredits={totalCredits} userSemCredits={userSemCredits} Loading={Loading} />
+      <Information dark={isDark} user={userDetails} cgpa={cgpa} totalCredits={totalCredits} userSemCredits={userSemCredits} Loading={Loading} />
       <div className="wrapper">
         <Barchart dark={isDark} userSemCredits={userSemCredits} Loading={Loading} />
         <Cateogory dark={isDark} runningTotal={runningTotal} Loading={Loading} />
