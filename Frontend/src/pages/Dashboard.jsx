@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Barchart from '../components/barchart/Barchart';
+import Barchart from '../components/barchart/BarChart';
 import Cateogory from '../components/category/Cateogory';
 import Information from '../components/information/Information';
 import Navbar from '../components/navbar/Navbar';
